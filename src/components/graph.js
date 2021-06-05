@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import Chart from 'chart.js/auto';
 
 function Graph(){
-    const [array, setArray] = useState([12, 11, 3, 5, 2, 4, 8, 9, 10]);
-   // const []
+    // const [nums, setNums] = useState([12, 11, 3, 5, 2, 4, 8, 9, 10]);
+    // const [xAxis, setXAxis] = useState(['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'lol', 'lmao' , 'ok']);
+    let nums = [12, 11, 3, 5, 2, 4, 8, 9, 10];
+    let xAxis = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'lol', 'lmao' , 'ok'];
     useEffect(()=>{
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'lol', 'lmao' , 'ok'],
+                labels: xAxis,
                 datasets: [{
                     label: '# of Votes',
-                    data: array,
+                    data: nums,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -41,11 +42,39 @@ function Graph(){
                 }
             }
         });
-        setInterval(()=>{
 
-        }, 1000);
+    let inputArr = myChart.data.datasets[0].data;
+    let n = inputArr.length;
+        
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+      }
+
+    const sort = async () =>{
+        for(let i = 0; i < n; i++) {
+            // Finding the smallest number in the subarray
+            let min = i;
+            for(let j = i+1; j < n; j++){
+                if(inputArr[j] < inputArr[min]) {
+                    min=j; 
+                }
+             }
+             if (min != i) {
+                 // Swapping the elements
+                 let tmp = inputArr[i]; 
+                 inputArr[i] = inputArr[min];
+                 inputArr[min] = tmp;
+                 myChart.update();  
+            }
+            await sleep(1000);
+        }
+    }
+
+    sort();
+    
+        
     });
-    return <canvas id="myChart" width="200" height="200"></canvas>
+    return <canvas id="myChart" width="10" height="10"></canvas>
 }
 
 export default Graph;
