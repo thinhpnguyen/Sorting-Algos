@@ -4,8 +4,8 @@ import Chart from 'chart.js/auto';
 function Graph(){
     // const [nums, setNums] = useState([12, 11, 3, 5, 2, 4, 8, 9, 10]);
     // const [xAxis, setXAxis] = useState(['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'lol', 'lmao' , 'ok']);
-    let nums = [12, 11, 3, 5, 2, 4, 8, 9, 10];
-    let xAxis = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'lol', 'lmao' , 'ok'];
+    let nums = [12, 11, 3, 5, 2, 4];
+    let xAxis = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
     useEffect(()=>{
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
@@ -15,14 +15,7 @@ function Graph(){
                 datasets: [{
                     label: '# of Votes',
                     data: nums,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: [
                         'rgba(255, 99, 132, 1)',
                         'rgba(54, 162, 235, 1)',
@@ -39,13 +32,21 @@ function Graph(){
                     y: {
                         beginAtZero: true
                     }
+                },
+                responsive: false,
+                animation: {
+                    duration: 0
                 }
             }
         });
 
     let inputArr = myChart.data.datasets[0].data;
+    //let colors = myChart.data.datasets[0].backgroundColor;
+    let borderColors = myChart.data.datasets[0].borderColor;
+    
     let n = inputArr.length;
-        
+
+    //used to slow down a loop
     const sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
       }
@@ -58,15 +59,25 @@ function Graph(){
                 if(inputArr[j] < inputArr[min]) {
                     min=j; 
                 }
+                await sleep(200);
              }
-             if (min != i) {
+             if (min !== i) {
                  // Swapping the elements
                  let tmp = inputArr[i]; 
+                 //let colorTmp = colors[i];
+                 let borderColorTmp = borderColors[i];
+
                  inputArr[i] = inputArr[min];
+                 //colors[i] = colors[min];
+                 borderColors[i] = borderColors[min];
+
                  inputArr[min] = tmp;
+                // colors[min] = colorTmp;
+                 borderColors[min] = borderColorTmp;
+
                  myChart.update();  
             }
-            await sleep(1000);
+           
         }
     }
 
@@ -74,7 +85,7 @@ function Graph(){
     
         
     });
-    return <canvas id="myChart" width="10" height="10"></canvas>
+    return <canvas id="myChart" width="400" height="400"></canvas>
 }
 
 export default Graph;
