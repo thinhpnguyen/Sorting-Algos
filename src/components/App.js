@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import Graph from './graph.js';
 
 function App() {
-  // const [sortEn, updateSortEn] = useState(false);
-  // const [chartCtx, updateChartCtx] = useState();
+  const [sortEn, updateSortEn] = useState(false);
 
-  // function sortHandler(){
-  //   updateSortEn(true);
-  // };
+  function sortHandler(){
+    updateSortEn(true);
+  };
 
   return (
     <div >
-      <Graph  />
+      <button onClick = {sortHandler}>sort</button>
+      <Graph sort = {sortEn}  />
     </div>
   );
 }

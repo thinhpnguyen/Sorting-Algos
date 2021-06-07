@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
-
+let myChart;
 function Graph(props){
     useEffect(()=>{
+        makeChart();
+    });
+
+    function makeChart() {
         let nums = [12, 11, 3, 5, 2, 4, 33, 21, 13, 7, 10];
         let xAxis = ['12', '11', '3', '5', '2', '4', '33', '21', '13', '7', '10'];
-        var ctx = document.getElementById('myChart');
-        var myChart = new Chart(ctx, {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        
+        //Have to destroy the old chart from the last render first!
+        if ( typeof myChart !== "undefined") {
+            myChart.destroy();
+        }
+        myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: xAxis,
@@ -56,7 +65,7 @@ function Graph(props){
         }
 
         function highlight(i){
-            colors[i] =  'rgba(255, 99, 132, 1)';
+            colors[i] =  'rgba(255, 99, 132, 0.8)';
             myChart.update();
         }
 
@@ -118,11 +127,15 @@ function Graph(props){
             
             }
         }
-        sort();
+
+        if(props.sort){
+            sort();
+        }
+      
     
     
         
-    });
+    }
     return <canvas id="myChart" width="400" height="400"></canvas>
 }
 
