@@ -7,11 +7,11 @@ function Graph(props){
     });
 
     function makeChart() {
-        let nums = [12, 11, 3, 5, 2, 4, 33, 21, 13, 7, 10];
+        let nums = props.nums;
         let xAxis = ['12', '11', '3', '5', '2', '4', '33', '21', '13', '7', '10'];
         var ctx = document.getElementById('myChart').getContext('2d');
         
-        //Have to destroy the old chart from the last render first!
+        //Have to destroy the old chart from the last render
         if ( typeof myChart !== "undefined") {
             myChart.destroy();
         }
@@ -128,11 +128,15 @@ function Graph(props){
             }
         }
 
-        if(props.sort){
+        if (props.reset){
+            inputArr = props.nums;  //the sort function currently changing the props directly, fix later
+            myChart.update();
+            console.log(props.nums);
+        }
+        else if(props.sort){
             sort();
         }
-      
-    
+
     
         
     }
