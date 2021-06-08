@@ -8,9 +8,10 @@ function Graph(props){
 
     function makeChart() {
         let nums = props.nums;
-        let xAxis = ['12', '11', '3', '5', '2', '4', '33', '21', '13', '7', '10'];
+        let xAxis = props.label.split(' ', 20);
         var ctx = document.getElementById('myChart').getContext('2d');
-        
+        let backgroundColorArray = new Array(props.nums.length);
+        backgroundColorArray.fill('rgba(255, 99, 132, 0.2)');
         //Have to destroy the old chart from the last render
         if ( typeof myChart !== "undefined") {
             myChart.destroy();
@@ -22,20 +23,7 @@ function Graph(props){
                 datasets: [{
                     label: '# of Votes',
                     data: nums,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)'
-                
-                    ],
+                    backgroundColor: backgroundColorArray,
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 }]
