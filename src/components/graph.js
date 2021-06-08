@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Chart from 'chart.js/auto';
 let myChart;
 function Graph(props){
