@@ -119,9 +119,11 @@ function Graph(props){
         if (props.reset){
             inputArr = props.nums;  //the sort function currently changing the props directly, fix later
             myChart.update();
-            console.log(props.nums);
+            // console.log(props.nums);
         }
         else if(props.sort){
+            inputArr = props.nums;  //the sort function currently changing the props directly, fix later
+            myChart.update();
             sort();
         }
 

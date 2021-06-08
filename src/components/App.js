@@ -7,7 +7,7 @@ function App() {
   const [reset, updateReset] = useState(false);
   //input
   const [input, updateInput] = useState("");
-  const [nums, updateNums] = useState([12, 11, 3, 5, 2, 4, 33, 21, 13, 7, 10]);
+  const [nums, updateNums] = useState([]);
   let inputNums = [];
   let inputNumsString = [];
   function inputToArray(){
@@ -38,7 +38,12 @@ function App() {
   function handleChange(event){
     const newInput = event.target.value;
     updateInput(newInput);
-    console.log(newInput);
+
+    inputToArray();
+
+    updateNums(inputNums);
+
+    // console.log(newInput);
   }
   return (
     <div >
