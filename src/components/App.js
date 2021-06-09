@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
 import Graph from './graph.js';
 
 function App() {
@@ -8,12 +7,25 @@ function App() {
   //input
   const [input, updateInput] = useState("");
   const [nums, updateNums] = useState([]);
+  const [filteredInput, updateFilteredInput] = useState("")
+
   let inputNums = [];
-  let inputNumsString = [];
+
+  function filter(input){
+    let newInput = input.split(' ', 20);
+    //only take in int
+    newInput = newInput.filter(num => {
+      return !isNaN(parseInt(num));
+    })
+    return newInput;
+  }
+
   function inputToArray(){
-    inputNumsString = input.split(" ", 20);
-    inputNumsString.forEach(num =>{
-      inputNums.push(parseInt(num));
+    
+    let newInput = filter(input);
+
+    newInput.forEach(num =>{
+        inputNums.push(parseInt(num));
     })
   }
 
@@ -24,6 +36,7 @@ function App() {
     inputToArray();
 
     updateNums(inputNums);
+    console.log(inputNums)
 
   };
 
@@ -38,19 +51,18 @@ function App() {
   function handleChange(event){
     const newInput = event.target.value;
     updateInput(newInput);
-
+    updateFilteredInput(filter(newInput));
     inputToArray();
-
+  
     updateNums(inputNums);
 
-    // console.log(newInput);
   }
   return (
     <div >
       <input placeholder = "type in a list of numbers" onChange={handleChange}></input>
       <button onClick = {handleSort}>sort</button>
       <button onClick = {handleReset}>reset</button>
-      <Graph sort = {sortEn} reset = {reset} nums = {nums} label = {input}  />
+      <Graph sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
     </div>
   );
 }

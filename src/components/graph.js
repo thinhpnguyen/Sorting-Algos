@@ -2,44 +2,8 @@ import React, { useEffect } from 'react';
 import Chart from 'chart.js/auto';
 let myChart;
 function Graph(props){
-    useEffect(()=>{
-        makeChart();
-    });
 
-    function makeChart() {
-        let nums = props.nums;
-        let xAxis = props.label.split(' ', 20);
-        var ctx = document.getElementById('myChart').getContext('2d');
-        let backgroundColorArray = new Array(props.nums.length);
-        backgroundColorArray.fill('rgba(255, 99, 132, 0.2)');
-        //Have to destroy the old chart from the last render
-        if ( typeof myChart !== "undefined") {
-            myChart.destroy();
-        }
-        myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: xAxis,
-                datasets: [{
-                    label: '# of Votes',
-                    data: nums,
-                    backgroundColor: backgroundColorArray,
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                responsive: false,
-                animation: {
-                    duration: 0
-                }
-            }
-        });
+    function seqentialSort(myChart){
         let inputArr = myChart.data.datasets[0].data;
         let labels = myChart.data.labels;
         let colors = myChart.data.datasets[0].backgroundColor;
@@ -127,9 +91,50 @@ function Graph(props){
             sort();
         }
 
-    
-        
     }
+
+    function makeChart() {
+        let nums = props.nums;
+        //console.log(nums);
+        let xAxis = props.label;
+        var ctx = document.getElementById('myChart').getContext('2d');
+        let backgroundColorArray = new Array(props.nums.length);
+        backgroundColorArray.fill('rgba(255, 99, 132, 0.2)');
+        //Have to destroy the old chart from the last render
+        if ( typeof myChart !== "undefined") {
+            myChart.destroy();
+        }
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: xAxis,
+                datasets: [{
+                    label: '# of Votes',
+                    data: nums,
+                    backgroundColor: backgroundColorArray,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: false,
+                animation: {
+                    duration: 0
+                }
+            }
+        });
+    
+        seqentialSort(myChart);
+    }
+
+    useEffect(()=>{
+        makeChart();
+    });
     return <canvas id="myChart" width="400" height="400"></canvas>
 }
 
