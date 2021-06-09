@@ -4,6 +4,7 @@ let myChart;
 function Graph(props){
 
     function seqentialSort(myChart){
+        let temp = myChart.data.datasets[0].data.slice(); // keep a copy for reset;
         let inputArr = myChart.data.datasets[0].data;
         let labels = myChart.data.labels;
         let colors = myChart.data.datasets[0].backgroundColor;
@@ -78,25 +79,24 @@ function Graph(props){
                 unhighlight(i);
             
             }
+            // console.log(myChart.data.datasets[0].data)
+            console.log(inputArr)
         }
 
         if (props.reset){
-            inputArr = props.nums;  //the sort function currently changing the props directly, fix later
+            inputArr = temp;  
             myChart.update();
             // console.log(props.nums);
         }
         else if(props.sort){
-            inputArr = props.nums;  //the sort function currently changing the props directly, fix later
-            myChart.update();
             sort();
         }
 
     }
 
     function makeChart() {
-        let nums = props.nums;
-        //console.log(nums);
-        let xAxis = props.label;
+        let nums = props.nums.slice(); //copy by value
+        let xAxis = props.label.slice();
         var ctx = document.getElementById('myChart').getContext('2d');
         let backgroundColorArray = new Array(props.nums.length);
         backgroundColorArray.fill('rgba(255, 99, 132, 0.2)');

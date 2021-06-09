@@ -9,7 +9,6 @@ function App() {
   const [nums, updateNums] = useState([]);
   const [filteredInput, updateFilteredInput] = useState("")
 
-  let inputNums = [];
 
   function filter(input){
     let newInput = input.split(' ', 20);
@@ -20,23 +19,26 @@ function App() {
     return newInput;
   }
 
+  //////////////// State Handles /////////////////////////
+
   function inputToArray(){
     
+    let nums = [];
     let newInput = filter(input);
 
     newInput.forEach(num =>{
-        inputNums.push(parseInt(num));
+        nums.push(parseInt(num));
     })
+
+    return nums;
   }
 
   function handleSort(){
     updateSortEn(true);
     updateReset(false);
 
-    inputToArray();
+    // updateNums(inputToArray());
 
-    updateNums(inputNums);
-    console.log(inputNums)
 
   };
 
@@ -44,17 +46,13 @@ function App() {
     updateSortEn(false);
     updateReset(true);
 
-    inputToArray();
-    updateNums(inputNums);
+    updateNums(inputToArray());
+    updateFilteredInput(filter(input));
   }
 
   function handleChange(event){
     const newInput = event.target.value;
     updateInput(newInput);
-    updateFilteredInput(filter(newInput));
-    inputToArray();
-  
-    updateNums(inputNums);
 
   }
   return (
