@@ -10,6 +10,8 @@ function App() {
   const [filteredInput, updateFilteredInput] = useState("")
 
 
+  //this function takes in a string
+  //filter the words that are numbers
   function filter(input){
     let newInput = input.split(' ', 20);
     //only take in int

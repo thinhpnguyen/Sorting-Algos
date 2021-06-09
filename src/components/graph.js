@@ -86,7 +86,8 @@ function Graph(props){
         if (props.reset){
             inputArr = temp;  
             myChart.update();
-            // console.log(props.nums);
+            console.log(props.nums);
+            console.log(myChart);
         }
         else if(props.sort){
             sort();
@@ -100,9 +101,14 @@ function Graph(props){
         var ctx = document.getElementById('myChart').getContext('2d');
         let backgroundColorArray = new Array(props.nums.length);
         backgroundColorArray.fill('rgba(255, 99, 132, 0.2)');
-        //Have to destroy the old chart from the last render
+        //For the subsequent renders, only need to update
         if ( typeof myChart !== "undefined") {
-            myChart.destroy();
+            myChart.data.datasets[0].data = nums;
+            myChart.data.labels = xAxis;
+            myChart.data.datasets[0].backgroundColor = backgroundColorArray.slice();
+            myChart.update();
+            seqentialSort(myChart);
+            return
         }
         myChart = new Chart(ctx, {
             type: 'bar',
