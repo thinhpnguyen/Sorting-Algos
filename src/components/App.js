@@ -53,6 +53,7 @@ function App() {
   }
 
   function handleChange(event){
+    updateSortEn(false);
     const newInput = event.target.value;
     updateInput(newInput);
 
