@@ -61,6 +61,7 @@ function App() {
   }
 
   function handleClear(){
+    updateSortEn(false);
     updateInput("");
   }
   return (

@@ -36,9 +36,19 @@ html {
     text-align: center;
 }
 
+.inputField > div{
+    padding: 3px 0;
+    border: 1px solid #c4c4c4;
+    border-left: none;
+}
+.clearButton:hover{
+    color: #009BDB;
+}
 .clearButton{
     font-size: 0.8rem;
-    border: 1px solid #c4c4c4;
+    border: none;
+    border-left: 1px solid #c4c4c4;
     border-width: 1px;
-    padding: 3px 5px; 
+    padding: 0 5px;
 }
+

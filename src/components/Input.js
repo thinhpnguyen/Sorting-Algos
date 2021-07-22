@@ -8,10 +8,10 @@ function input(props){
          className="input"
          value = {props.input}
          />
-
-         <i className="clearButton" onClick = {props.handleClear}>
-             clear
-         </i>
+        <div>
+            <i className="fas fa-times clearButton" onClick = {props.handleClear}></i>
+        </div>
+       
     </div>
 }
 
