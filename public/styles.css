@@ -13,17 +13,32 @@ html {
 .navbar {
     background-color: rgba(255, 99, 132, 0.2);
     padding: 16px 32px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
     font-size: 1.5rem;
   }
 
-.input {
+.inputField {
+    display: flex;
+    position: relative;
     width: 100%;
+    flex-direction: row;
+  }
+.input {
+    flex: 1;
     padding: 4px;
     outline: none;
+    border: 1px solid #c4c4c4;
+    border-left: none;
+    border-right: none;
     font-size: 1rem;
     font-family: inherit;
     resize: none;
     overflow: auto;
     text-align: center;
+}
+
+.clearButton{
+    font-size: 0.8rem;
+    border: 1px solid #c4c4c4;
+    border-width: 1px;
+    padding: 3px 5px; 
 }

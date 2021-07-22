@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Graph from './graph.js';
 import Header from "./Header.js";
+import Input from "./Input.js";
 function App() {
   const [sortEn, updateSortEn] = useState(false);
   const [reset, updateReset] = useState(false);
@@ -56,12 +57,16 @@ function App() {
     updateSortEn(false);
     const newInput = event.target.value;
     updateInput(newInput);
+  
+  }
 
+  function handleClear(){
+    updateInput("");
   }
   return (
     <div >
       <Header />
-      <input placeholder = "type in a list of numbers. Ex: 1 12 3 4" onChange={handleChange} className="input"></input>
+      <Input handleChange = {handleChange} handleClear = {handleClear} input ={input}/>
       <button onClick = {handleSort}>sort</button>
       <button onClick = {handleReset}>reset</button>
       <Graph sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
