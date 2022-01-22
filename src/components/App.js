@@ -14,11 +14,12 @@ function App() {
   //this function takes in a string
   //filter the words that are numbers
   function filter(input){
+    // only takes in the first 20 numbers, exlude other characters
+    input = input.replace(/[^\d\s]/g, '');
+    input = input.replace(/\s\s+/g, ' ');
+    input = input.replace(/(^\s|\s$)/g, '');
+    console.log(input);
     let newInput = input.split(' ', 20);
-    //only take in int
-    newInput = newInput.filter(num => {
-      return !isNaN(parseInt(num));
-    })
     return newInput;
   }
 
