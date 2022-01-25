@@ -13,14 +13,13 @@ function App() {
 
   //this function takes in a string
   //filter the words that are numbers
-  function filter(input){
-    // only takes in the first 20 numbers, exlude other characters
-    input = input.replace(/[^\d\s]/g, '');
-    input = input.replace(/\s\s+/g, ' ');
-    input = input.replace(/(^\s|\s$)/g, '');
-    console.log(input);
-    let newInput = input.split(' ', 20);
-    return newInput;
+  function filter(str){
+    // only takes str the first 20 numbers, exlude other characters
+    str = str.replace(/[^\d\s]/g, '');
+    str = str.replace(/\s\s+/g, ' ');
+    str = str.replace(/(^\s|\s$)/g, '');
+    //console.log(str);
+    return str.split(' ', 50);
   }
 
   //////////////// State Handles /////////////////////////
@@ -58,7 +57,6 @@ function App() {
     updateSortEn(false);
     const newInput = event.target.value;
     updateInput(newInput);
-  
   }
 
   function handleClear(){
@@ -68,7 +66,7 @@ function App() {
   return (
     <div >
       <Header />
-      <Input handleChange = {handleChange} handleClear = {handleClear} input ={input}/>
+      <Input handleChange = {handleChange} handleClear = {handleClear} input = {input}/>
       <button onClick = {handleSort}>sort</button>
       <button onClick = {handleReset}>reset</button>
       <Graph sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />

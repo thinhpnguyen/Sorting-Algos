@@ -80,14 +80,14 @@ function Graph(props){
             
             }
             // console.log(myChart.data.datasets[0].data)
-            console.log(inputArr)
+            //console.log(inputArr)
         }
 
         if (props.reset){
             inputArr = temp;  
             myChart.update();
-            console.log(props.nums);
-            console.log(myChart);
+            //console.log(props.nums);
+            //console.log(myChart);
         }
         else if(props.sort){
             sort();
@@ -140,7 +140,7 @@ function Graph(props){
 
     useEffect(()=>{
         makeChart();
-    });
+    },[props.reset]);
     return <canvas id="myChart" width="400" height="400"></canvas>
 }
 

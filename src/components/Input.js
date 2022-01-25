@@ -10,8 +10,7 @@ function input(props){
          />
         <div>
             <i className="fas fa-times clearButton" onClick = {props.handleClear}></i>
-        </div>
-       
+        </div> 
     </div>
 }
 
