@@ -31,25 +31,31 @@ function makeChart(props) {
             }]
         },
         options: {
-            // scales: {
-            //     y: {
-            //         beginAtZero: true
-            //     }
-            // },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
             responsive: false,
             animation: {
                 duration: 0
             },
-            legend: {
-                display: false
-            },
-            tooltips: {
-                callbacks: {
-                   label: function(tooltipItem) {
-                          return tooltipItem.yLabel;
+            plugins:{
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+               },
+               title:{
+                   display: true,
+                   text : "Sequential Sort",
+                   font:{
+                       size : 20
                    }
-                }
-            }
+               }
+            },
+
         }
     });
 }
