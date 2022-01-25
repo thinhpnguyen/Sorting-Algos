@@ -7,6 +7,7 @@ function input(props){
          onChange={props.handleChange} 
          className="input"
          value = {props.input}
+         onKeyDown={props.handleEnter}
          />
         <div>
             <i className="fas fa-times clearButton" onClick = {props.handleClear}></i>

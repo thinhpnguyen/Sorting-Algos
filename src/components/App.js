@@ -46,6 +46,11 @@ function App() {
     updateSortEn(false);
   }
 
+  function handleEnter(event){
+    if(event.key != "Enter") return;
+    updateReset(true);
+    updateSortEn(false);
+  }
   function handleChange(event){
     const newInput = event.target.value;
     updateInput(newInput);
@@ -61,7 +66,7 @@ function App() {
   return (
     <div >
       <Header />
-      <Input handleChange = {handleChange} handleClear = {handleClear} input = {input}/>
+      <Input handleChange = {handleChange} handleClear = {handleClear} handleEnter = {handleEnter} input = {input}/>
       <button onClick = {handleSort}>sort</button>
       <button onClick = {handleReset}>reset</button>
       <Graph sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
