@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useEffect } from 'react/cjs/react.development';
 import Graph from './Graph.js';
 import Header from "./Header.js";
 import Input from "./Input.js";
@@ -50,12 +51,12 @@ function App() {
     if(event.key != "Enter") return;
     updateReset(true);
     updateSortEn(false);
+    console.log("enter");
   }
   function handleChange(event){
     const newInput = event.target.value;
     updateInput(newInput);
-    updateNums(inputToArray());
-    updateFilteredInput(filter(input));
+
     updateReset(false); //allow the reset button to work again
   }
 
@@ -63,6 +64,15 @@ function App() {
     updateReset(false);
     updateInput("");
   }
+
+  // cannot put inside handlechange
+  // because of current closures
+  // the filtered input will lack behind input by 1 item
+  useEffect(()=> {
+    updateNums(inputToArray());
+    updateFilteredInput(filter(input));
+  },[input]);
+
   return (
     <div >
       <Header />

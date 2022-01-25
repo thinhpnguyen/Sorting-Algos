@@ -15,7 +15,6 @@ function makeChart(props) {
         myChart.data.datasets[0].data = nums;
         myChart.data.labels = xAxis;
         myChart.data.datasets[0].backgroundColor = backgroundColorArray.slice();
-        console.log("updated only");
         myChart.update();
         return myChart;
     }
@@ -24,7 +23,7 @@ function makeChart(props) {
         data: {
             labels: xAxis,
             datasets: [{
-                label: '# of Votes',
+                label: 'Sequential Sort',
                 data: nums,
                 backgroundColor: backgroundColorArray,
                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -32,14 +31,24 @@ function makeChart(props) {
             }]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
+            // scales: {
+            //     y: {
+            //         beginAtZero: true
+            //     }
+            // },
             responsive: false,
             animation: {
                 duration: 0
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                callbacks: {
+                   label: function(tooltipItem) {
+                          return tooltipItem.yLabel;
+                   }
+                }
             }
         }
     });
