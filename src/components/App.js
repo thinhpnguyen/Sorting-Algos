@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import Graph from './graph.js';
+import Graph from './Graph.js';
 import Header from "./Header.js";
 import Input from "./Input.js";
 function App() {
   const [sortEn, updateSortEn] = useState(false);
-  const [reset, updateReset] = useState(false);
+  const [reset, updateReset] = useState(true); // render empty graph first
   //input
   const [input, updateInput] = useState("");
   const [nums, updateNums] = useState([]);
-  const [filteredInput, updateFilteredInput] = useState("")
+  const [filteredInput, updateFilteredInput] = useState("") // use for labels
 
 
   //this function takes in a string
@@ -39,28 +39,23 @@ function App() {
   function handleSort(){
     updateSortEn(true);
     updateReset(false);
-
-    // updateNums(inputToArray());
-
-
   };
 
   function handleReset(){
-    updateSortEn(false);
     updateReset(true);
-
-    updateNums(inputToArray());
-    updateFilteredInput(filter(input));
+    updateSortEn(false);
   }
 
   function handleChange(event){
-    updateSortEn(false);
     const newInput = event.target.value;
     updateInput(newInput);
+    updateNums(inputToArray());
+    updateFilteredInput(filter(input));
+    updateReset(false); //allow the reset button to work again
   }
 
   function handleClear(){
-    updateSortEn(false);
+    updateReset(false);
     updateInput("");
   }
   return (
