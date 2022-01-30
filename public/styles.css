@@ -21,6 +21,7 @@ html {
     position: relative;
     width: 100%;
     flex-direction: row;
+    height: 2rem;
   }
 .input {
     flex: 1;
@@ -37,13 +38,16 @@ html {
 }
 
 .inputField > div{
-    padding: 3px 0;
     border: 1px solid #c4c4c4;
     border-left: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .clearButton:hover{
     color: #009BDB;
 }
+
 .clearButton{
     font-size: 0.8rem;
     border: none;
@@ -52,3 +56,13 @@ html {
     padding: 0 5px;
 }
 
+.button{
+    color: white;
+    background-color: #fc6a8a;
+    width : 3rem;
+    height : 1.5rem;
+    border: none;
+    border-radius: 10%;
+    margin: 0.5rem 0.5rem 0 0.5rem;
+    font-size: .75rem; 
+}

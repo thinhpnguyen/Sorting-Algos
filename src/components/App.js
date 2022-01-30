@@ -77,8 +77,8 @@ function App() {
     <div >
       <Header />
       <Input handleChange = {handleChange} handleClear = {handleClear} handleEnter = {handleEnter} input = {input}/>
-      <button onClick = {handleSort}>sort</button>
-      <button onClick = {handleReset}>reset</button>
+      <button className = "button" onClick = {handleSort}>Sort</button>
+      <button className = "button" onClick = {handleReset}>Reset</button>
       <Graph sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
     </div>
   );
