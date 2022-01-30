@@ -1,6 +1,6 @@
 
 
-export function sequentialSort(myChart, sortEn){
+export function Sort(myChart, sortEn, type){
     //let temp = myChart.data.datasets[0].data.slice(); // keep a copy for reset;
     let inputArr = myChart.chart.data.datasets[0].data;
     let labels = myChart.chart.data.labels;
@@ -29,7 +29,7 @@ export function sequentialSort(myChart, sortEn){
         myChart.chart.update();
     }
 
-    const sort = async () =>{
+    const selectionSort = async () =>{
         for(let i = 0; i < n; i++) {
             if(!sortEn){ // stop the for loop if reset mid-way
                 return;
@@ -82,5 +82,54 @@ export function sequentialSort(myChart, sortEn){
         // console.log(myChart.data.datasets[0].data)
         //console.log(inputArr)
     }
-    sort();
+    function swap(arr, i, min)
+    {
+        let tmp = inputArr[i]; 
+        let labelTmp = labels[i];
+    
+
+        arr[i] = arr[min];
+        labels[i] = labels[min];
+
+        arr[min] = tmp;
+        labels[min] = labelTmp;
+
+        myChart.chart.update(); 
+    };
+    const bubbleSort = async () => {
+        if(!sortEn){ // stop the for loop if reset mid-way
+            return;
+        }
+
+        let i, j;
+        for (i = 0; i < n-1; i++)
+        {
+            //change color if ith column
+            //highlight(i);
+            for (j = 0; j < n-i-1; j++)
+            {
+                highlight(j);
+                if (inputArr[j] > inputArr[j+1])
+                {
+                    highlight(j+1);
+                    swap(inputArr,j,j+1);
+                }
+                await sleep(50);
+                unhighlight(j+1);
+                unhighlight(j);
+            }
+            //unhighlight(i);
+        }
+    }
+    switch(type){
+        case "Selection Sort":
+            selectionSort();
+            break;
+        case "Bubble Sort":
+            bubbleSort();
+            break;
+        default:
+            console.log("Sort Error");
+    }
 }
+

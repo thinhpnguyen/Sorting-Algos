@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
-import {sequentialSort} from "./Sort.js";
+import {Sort} from "./Sort.js";
 // use objects for passing by reference
 let myChart1 = {
 }
@@ -33,7 +33,7 @@ function makeChart(props, myChart) {
         data: {
             labels: xAxis,
             datasets: [{
-                label: 'Sequential Sort',
+                label: props.sortType,
                 data: nums,
                 backgroundColor: backgroundColorArray,
                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -59,7 +59,7 @@ function makeChart(props, myChart) {
                },
                title:{
                    display: true,
-                   text : "Sequential Sort",
+                   text : props.sortType,
                    font:{
                        size : 20
                    }
@@ -100,16 +100,16 @@ function Graph(props){
         if (props.sort){
             switch (props.id){
                 case "myChart1":
-                    sequentialSort(myChart1, props.sort);
+                    Sort(myChart1, props.sort, props.sortType);
                     break;
                 case "myChart2":
-                    sequentialSort(myChart2, props.sort);
+                    Sort(myChart2, props.sort, props.sortType);
                     break;
                 case "myChart3":
-                    sequentialSort(myChart3, props.sort);
+                    Sort(myChart3, props.sort, props.sortType);
                     break;
                 case "myChart4":
-                    sequentialSort(myChart4, props.sort);
+                    Sort(myChart4, props.sort, props.sortType);
                     break;
                 default:
                     console.log("Make chart error!");

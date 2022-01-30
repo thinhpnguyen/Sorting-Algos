@@ -82,11 +82,15 @@ function App() {
         <button className = "button" onClick = {handleReset}>Reset</button>
       </div>
       
-      <div className ="graphDiv">
-        <Graph  id = "myChart1" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
-        <Graph  id = "myChart2" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
-        <Graph  id = "myChart3" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
-        <Graph  id = "myChart4" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+      <div className ="row">
+        <div className = "column1">
+          <Graph  id = "myChart1" sortType = "Selection Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+          <Graph  id = "myChart2" sortType = "Bubble Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+        </div>
+        <div className = "column2">
+          <Graph  id = "myChart3" sortType = "Selection Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+          <Graph  id = "myChart4" sortType = "Selection Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+        </div>
       </div>
 
     </div>
