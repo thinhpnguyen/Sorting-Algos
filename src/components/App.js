@@ -48,7 +48,7 @@ function App() {
   }
 
   function handleEnter(event){
-    if(event.key != "Enter") return;
+    if(event.key !== "Enter") return;
     updateReset(true);
     updateSortEn(false);
     console.log("enter");
@@ -77,9 +77,18 @@ function App() {
     <div >
       <Header />
       <Input handleChange = {handleChange} handleClear = {handleClear} handleEnter = {handleEnter} input = {input}/>
-      <button className = "button" onClick = {handleSort}>Sort</button>
-      <button className = "button" onClick = {handleReset}>Reset</button>
-      <Graph sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+      <div className="globalButton">
+        <button className = "button" onClick = {handleSort}>Sort</button>
+        <button className = "button" onClick = {handleReset}>Reset</button>
+      </div>
+      
+      <div className ="graphDiv">
+        <Graph  id = "myChart1" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+        <Graph  id = "myChart2" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+        <Graph  id = "myChart3" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+        <Graph  id = "myChart4" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+      </div>
+
     </div>
   );
 }

@@ -2,10 +2,10 @@
 
 export function sequentialSort(myChart, sortEn){
     //let temp = myChart.data.datasets[0].data.slice(); // keep a copy for reset;
-    let inputArr = myChart.data.datasets[0].data;
-    let labels = myChart.data.labels;
-    let colors = myChart.data.datasets[0].backgroundColor;
-    //let borderColors = myChart.data.datasets[0].borderColor;
+    let inputArr = myChart.chart.data.datasets[0].data;
+    let labels = myChart.chart.data.labels;
+    let colors = myChart.chart.data.datasets[0].backgroundColor;
+    //let borderColors = myChart.chart.data.datasets[0].borderColor;
     
     let n = inputArr.length;
 
@@ -16,17 +16,17 @@ export function sequentialSort(myChart, sortEn){
 
     function highlight(i){
         colors[i] =  'rgba(255, 99, 132, 0.8)';
-        myChart.update();
+        myChart.chart.update();
     }
 
     function unhighlight(i){
         colors[i] =  'rgba(255, 99, 132, 0.2)';
-        myChart.update();
+        myChart.chart.update();
     }
 
     function highlightMin(i){
         colors[i] =  'rgba(54, 162, 235, 0.2)';
-        myChart.update();
+        myChart.chart.update();
     }
 
     const sort = async () =>{
@@ -72,7 +72,7 @@ export function sequentialSort(myChart, sortEn){
                 inputArr[min] = tmp;
                 labels[min] = labelTmp;
 
-                myChart.update();  
+                myChart.chart.update();  
             }
 
             //change color back

@@ -55,7 +55,11 @@ html {
     border-width: 1px;
     padding: 0 5px;
 }
-
+.globalButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .button{
     color: white;
     background-color: #fc6a8a;
@@ -63,6 +67,19 @@ html {
     height : 1.5rem;
     border: none;
     border-radius: 10%;
-    margin: 0.5rem 0.5rem 0 0.5rem;
+    margin: 0.5rem 0.25rem;
     font-size: .75rem; 
+}
+
+.graphDiv{
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.graph{
+    margin: 2rem 2rem;
 }
