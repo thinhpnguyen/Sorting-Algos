@@ -38,7 +38,7 @@ function App() {
   }
 
   function findMax(){
-    let m = 0;
+    let m = 1; // default value for y-axis
     nums.forEach(num =>{
       if (num > m) m = num;
     })
@@ -58,7 +58,7 @@ function App() {
     if(event.key !== "Enter") return;
     updateReset(true);
     updateSortEn(false);
-    console.log("enter");
+    //console.log("enter");
   }
   function handleChange(event){
     const newInput = event.target.value;
