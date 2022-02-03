@@ -88,8 +88,8 @@ function App() {
           <Graph  id = "myChart2" sortType = "Bubble Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
         </div>
         <div className = "column2">
-          <Graph  id = "myChart3" sortType = "Selection Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
-          <Graph  id = "myChart4" sortType = "Selection Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+          <Graph  id = "myChart3" sortType = "Merge Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+          <Graph  id = "myChart4" sortType = "Quick Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
         </div>
       </div>
 
