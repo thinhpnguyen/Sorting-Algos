@@ -1,5 +1,5 @@
 
-let delay = 50;
+let delay = 25;
 export function Sort(myChart, sortEn, type){
     //let temp = myChart.data.datasets[0].data.slice(); // keep a copy for reset;
     let inputArr = myChart.chart.data.datasets[0].data;

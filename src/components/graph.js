@@ -23,7 +23,7 @@ function makeChart(props, myChart) {
     //For the subsequent renders, only need to update
     if ( typeof myChart.chart !== "undefined") {
         myChart.chart.data.datasets[0].data = nums;
-        myChart.chart.data.labels = xAxis;
+        myChart.chart.data.labels = nums.map(v => '');
         myChart.chart.data.datasets[0].backgroundColor = backgroundColorArray.slice();
         myChart.chart.options.scales.y.max = props.max;
         myChart.chart.update();
@@ -32,7 +32,7 @@ function makeChart(props, myChart) {
     myChart.chart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: xAxis,
+            labels: nums.map(v => ''),
             datasets: [{
                 label: props.sortType,
                 data: nums,
