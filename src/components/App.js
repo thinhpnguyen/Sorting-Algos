@@ -10,7 +10,7 @@ function App() {
   const [input, updateInput] = useState("");
   const [nums, updateNums] = useState([]);
   const [filteredInput, updateFilteredInput] = useState("") // use for labels
-
+  const [max, updateMax] = useState(1); // use to scale the graph, so it will be changed during sorting
 
   //this function takes in a string
   //filter the words that are numbers
@@ -37,6 +37,13 @@ function App() {
     return nums;
   }
 
+  function findMax(){
+    let m = 0;
+    nums.forEach(num =>{
+      if (num > m) m = num;
+    })
+    return m;
+  }
   function handleSort(){
     updateSortEn(true);
     updateReset(false);
@@ -73,6 +80,9 @@ function App() {
     updateFilteredInput(filter(input));
   },[input]);
 
+  useEffect(() =>{
+    updateMax(findMax());
+  }, [nums]);
   return (
     <div >
       <Header />
@@ -84,12 +94,12 @@ function App() {
       
       <div className ="row">
         <div className = "column1">
-          <Graph  id = "myChart1" sortType = "Selection Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
-          <Graph  id = "myChart2" sortType = "Bubble Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+          <Graph  id = "myChart1" sortType = "Selection Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput} max = {max} />
+          <Graph  id = "myChart2" sortType = "Bubble Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  max = {max}/>
         </div>
         <div className = "column2">
-          <Graph  id = "myChart3" sortType = "Merge Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
-          <Graph  id = "myChart4" sortType = "Quick Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  />
+          <Graph  id = "myChart3" sortType = "Merge Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  max = {max}/>
+          <Graph  id = "myChart4" sortType = "Quick Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput} max = {max} />
         </div>
       </div>
 

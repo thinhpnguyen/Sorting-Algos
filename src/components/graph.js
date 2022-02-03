@@ -12,8 +12,8 @@ let myChart4 = {
 }
 function makeChart(props, myChart) {
 
-    console.log(myChart);
-    console.log(props.id, myChart);
+    //console.log(props.max);
+    // console.log(props.id, myChart);
     let nums = props.nums.slice(); //copy by value
     let xAxis = props.label.slice();
     var ctx = document.getElementById(props.id).getContext('2d');
@@ -25,6 +25,7 @@ function makeChart(props, myChart) {
         myChart.chart.data.datasets[0].data = nums;
         myChart.chart.data.labels = xAxis;
         myChart.chart.data.datasets[0].backgroundColor = backgroundColorArray.slice();
+        myChart.chart.options.scales.y.max = props.max;
         myChart.chart.update();
         return myChart;
     }
@@ -43,6 +44,7 @@ function makeChart(props, myChart) {
         options: {
             scales: {
                 y: {
+                    max: props.max,
                     beginAtZero: true
                 }
             },
@@ -68,8 +70,8 @@ function makeChart(props, myChart) {
 
         }
     });
-    console.log(props.id, myChart);
-    console.log(myChart);
+    // console.log(props.id, myChart);
+    // console.log(myChart);
 }
 
 function Graph(props){

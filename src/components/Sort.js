@@ -183,7 +183,7 @@ export function Sort(myChart, sortEn, type){
         }
     }
     const mergeSortHelper = async (arr, l, r) => {
-        console.log(l, r);
+        //console.log(l, r);
         if(l>=r){
             return;//returns recursively
         }
