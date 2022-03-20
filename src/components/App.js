@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import { useEffect } from 'react/cjs/react.development';
-import Graph from './Graph.js';
+import React, { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
+import Graph from "./Graph.js";
 import Header from "./Header.js";
 import Input from "./Input.js";
 function App() {
@@ -9,65 +9,64 @@ function App() {
   //input
   const [input, updateInput] = useState("");
   const [nums, updateNums] = useState([]);
-  const [filteredInput, updateFilteredInput] = useState("") // use for labels
+  const [filteredInput, updateFilteredInput] = useState(""); // use for labels
   const [max, updateMax] = useState(1); // use to scale the graph, so it will be changed during sorting
 
   //this function takes in a string
   //filter the words that are numbers
-  function filter(str){
+  function filter(str) {
     // only takes str the first 20 numbers, exlude other characters
-    str = str.replace(/[^\d\s]/g, '');
-    str = str.replace(/\s\s+/g, ' ');
-    str = str.replace(/(^\s|\s$)/g, '');
+    str = str.replace(/[^\d\s]/g, "");
+    str = str.replace(/\s\s+/g, " ");
+    str = str.replace(/(^\s|\s$)/g, "");
     //console.log(str);
-    return str.split(' ', 50);
+    return str.split(" ", 50);
   }
 
   //////////////// State Handles /////////////////////////
 
-  function inputToArray(){
-    
+  function inputToArray() {
     let nums = [];
     let newInput = filter(input);
 
-    newInput.forEach(num =>{
-        nums.push(parseInt(num));
-    })
+    newInput.forEach((num) => {
+      nums.push(parseInt(num));
+    });
 
     return nums;
   }
 
-  function findMax(){
+  function findMax() {
     let m = 1; // default value for y-axis
-    nums.forEach(num =>{
+    nums.forEach((num) => {
       if (num > m) m = num;
-    })
+    });
     return m;
   }
-  function handleSort(){
+  function handleSort() {
     updateSortEn(true);
     updateReset(false);
-  };
+  }
 
-  function handleReset(){
+  function handleReset() {
     updateReset(true);
     updateSortEn(false);
   }
 
-  function handleEnter(event){
-    if(event.key !== "Enter") return;
+  function handleEnter(event) {
+    if (event.key !== "Enter") return;
     updateReset(true);
     updateSortEn(false);
     //console.log("enter");
   }
-  function handleChange(event){
+  function handleChange(event) {
     const newInput = event.target.value;
     updateInput(newInput);
 
     updateReset(false); //allow the reset button to work again
   }
 
-  function handleClear(){
+  function handleClear() {
     updateReset(false);
     updateInput("");
   }
@@ -75,34 +74,74 @@ function App() {
   // cannot put inside handlechange
   // because of current closures
   // the filtered input will lack behind input by 1 item
-  useEffect(()=> {
+  useEffect(() => {
     updateNums(inputToArray());
     updateFilteredInput(filter(input));
-  },[input]);
+  }, [input]);
 
-  useEffect(() =>{
+  useEffect(() => {
     updateMax(findMax());
   }, [nums]);
   return (
-    <div >
+    <div>
       <Header />
-      <Input handleChange = {handleChange} handleClear = {handleClear} handleEnter = {handleEnter} input = {input}/>
+      <Input
+        handleChange={handleChange}
+        handleClear={handleClear}
+        handleEnter={handleEnter}
+        input={input}
+      />
       <div className="globalButton">
-        <button className = "button" onClick = {handleSort}>Sort</button>
-        <button className = "button" onClick = {handleReset}>Reset</button>
-      </div>
-      
-      <div className ="row">
-        <div className = "column1">
-          <Graph  id = "myChart1" sortType = "Selection Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput} max = {max} />
-          <Graph  id = "myChart2" sortType = "Bubble Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  max = {max}/>
-        </div>
-        <div className = "column2">
-          <Graph  id = "myChart3" sortType = "Merge Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput}  max = {max}/>
-          <Graph  id = "myChart4" sortType = "Quick Sort" sort = {sortEn} reset = {reset} nums = {nums} label = {filteredInput} max = {max} />
-        </div>
+        <button className="button" onClick={handleSort}>
+          Sort
+        </button>
+        <button className="button" onClick={handleReset}>
+          Reset
+        </button>
       </div>
 
+      <div className="row">
+        <div className="column1">
+          <Graph
+            id="myChart1"
+            sortType="Selection Sort"
+            sort={sortEn}
+            reset={reset}
+            nums={nums}
+            label={filteredInput}
+            max={max}
+          />
+          <Graph
+            id="myChart2"
+            sortType="Bubble Sort"
+            sort={sortEn}
+            reset={reset}
+            nums={nums}
+            label={filteredInput}
+            max={max}
+          />
+        </div>
+        <div className="column2">
+          <Graph
+            id="myChart3"
+            sortType="Merge Sort"
+            sort={sortEn}
+            reset={reset}
+            nums={nums}
+            label={filteredInput}
+            max={max}
+          />
+          <Graph
+            id="myChart4"
+            sortType="Quick Sort"
+            sort={sortEn}
+            reset={reset}
+            nums={nums}
+            label={filteredInput}
+            max={max}
+          />
+        </div>
+      </div>
     </div>
   );
 }

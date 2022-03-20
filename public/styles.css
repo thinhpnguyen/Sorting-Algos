@@ -1,108 +1,111 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 html {
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 900;
-    font-size: 1.2rem;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
 }
 
 .navbar {
-    background-color: rgba(255, 99, 132, 0.2);
-    padding: 16px 32px;
-    font-size: 1.5rem;
-  }
+  background-color: rgba(255, 99, 132, 0.2);
+  padding: 16px 32px;
+  font-size: 1.5rem;
+}
+.logo {
+  display: inline-block;
+}
 
 .inputField {
-    display: flex;
-    position: relative;
-    width: 100%;
-    flex-direction: row;
-    height: 2rem;
-  }
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: row;
+  height: 2rem;
+}
 .input {
-    flex: 1;
-    padding: 4px;
-    outline: none;
-    border: 1px solid #c4c4c4;
-    border-left: none;
-    border-right: none;
-    font-size: 1rem;
-    font-family: inherit;
-    resize: none;
-    overflow: auto;
-    text-align: center;
+  flex: 1;
+  padding: 4px;
+  outline: none;
+  border: 1px solid #c4c4c4;
+  border-left: none;
+  border-right: none;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+  overflow: auto;
+  text-align: center;
 }
 
-.inputField > div{
-    border: 1px solid #c4c4c4;
-    border-left: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.inputField > div {
+  border: 1px solid #c4c4c4;
+  border-left: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.clearButton:hover{
-    color: #009BDB;
-}
-
-.clearButton{
-    font-size: 0.8rem;
-    border: none;
-    border-left: 1px solid #c4c4c4;
-    border-width: 1px;
-    padding: 0 5px;
-}
-.globalButton{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.button{
-    color: white;
-    background-color: #fc6a8a;
-    width : 3rem;
-    height : 1.5rem;
-    border: none;
-    border-radius: 10%;
-    margin: 0.5rem 0.25rem;
-    font-size: .75rem; 
+.clearButton:hover {
+  color: #009bdb;
 }
 
-.graphDiv{
-    display: flex;
-    position: relative;
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+.clearButton {
+  font-size: 0.8rem;
+  border: none;
+  border-left: 1px solid #c4c4c4;
+  border-width: 1px;
+  padding: 0 5px;
+}
+.globalButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+  color: white;
+  background-color: #fc6a8a;
+  width: 3rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 10%;
+  margin: 0.5rem 0.25rem;
+  font-size: 0.75rem;
+}
+
+.graphDiv {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .column1 {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  align-items: flex-end;
 }
 .column2 {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  align-items: flex-start;
 }
-.graph{
-    margin: 2rem 2rem;
+.graph {
+  margin: 2rem 2rem;
 }
