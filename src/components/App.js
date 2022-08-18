@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useMemo } from "react";
 import Graph from "./Graph.js";
 import Header from "./Header.js";
 import Input from "./Input.js";
@@ -8,12 +7,9 @@ function App() {
   const [reset, updateReset] = useState(true); // render empty graph first
   //input
   const [input, updateInput] = useState("");
-  const [nums, updateNums] = useState([]);
-  const [filteredInput, updateFilteredInput] = useState(""); // use for labels
-  const [max, updateMax] = useState(1); // use to scale the graph, so it will be changed during sorting
 
   //this function takes in a string
-  //filter the words that are numbers
+  //filter out only the number part
   function filter(str) {
     // only takes str the first 20 numbers, exlude other characters
     str = str.replace(/[^\d\s]/g, "");
@@ -22,33 +18,34 @@ function App() {
     //console.log(str);
     return str.split(" ", 50);
   }
-
-  //////////////// State Handles /////////////////////////
-
-  function inputToArray() {
+  function inputToNums(filtered) {
     let nums = [];
-    let newInput = filter(input);
-
-    newInput.forEach((num) => {
-      nums.push(parseInt(num));
+    filtered.forEach((str) => {
+      nums.push(parseInt(str));
     });
-
     return nums;
   }
 
-  function findMax() {
+  function findMax(nums) {
     let m = 1; // default value for y-axis
     nums.forEach((num) => {
       if (num > m) m = num;
     });
     return m;
   }
+
+  const filteredInput = useMemo(() => filter(input), [input]); // use for labels
+  const nums = useMemo(() => inputToNums(filteredInput), [filteredInput]);
+  const max = useMemo(() => findMax(nums), [nums]); // use to scale the graph, so it will be changed during sorting
+
+  //////////////// State Handles /////////////////////////
   function handleSort() {
     updateSortEn(true);
     updateReset(false);
   }
 
   function handleReset() {
+    console.log(nums);
     updateReset(true);
     updateSortEn(false);
   }
@@ -62,7 +59,6 @@ function App() {
   function handleChange(event) {
     const newInput = event.target.value;
     updateInput(newInput);
-
     updateReset(false); //allow the reset button to work again
   }
 
@@ -71,17 +67,6 @@ function App() {
     updateInput("");
   }
 
-  // cannot put inside handlechange
-  // because of current closures
-  // the filtered input will lack behind input by 1 item
-  useEffect(() => {
-    updateNums(inputToArray());
-    updateFilteredInput(filter(input));
-  }, [input]);
-
-  useEffect(() => {
-    updateMax(findMax());
-  }, [nums]);
   return (
     <div>
       <Header />

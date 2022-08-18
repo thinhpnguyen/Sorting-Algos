@@ -62,10 +62,12 @@ function makeChart(props, chart_ctx, setGraph) {
     })
   );
 }
+let e = 0;
 
-function Graph(props) {
+let Graph = React.memo((props) => {
   // props.reset in initialized to true to render the empty graph first
   let [graph_ctx, setGraph] = useState(undefined);
+
   useEffect(() => {
     if (props.reset) {
       makeChart(props, graph_ctx, setGraph);
@@ -80,5 +82,5 @@ function Graph(props) {
   return (
     <canvas className="graph" id={props.id} width="400" height="400"></canvas>
   );
-}
+});
 export default Graph;
