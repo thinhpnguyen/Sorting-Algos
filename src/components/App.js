@@ -16,7 +16,7 @@ function App() {
     str = str.replace(/\s\s+/g, " ");
     str = str.replace(/(^\s|\s$)/g, "");
     //console.log(str);
-    return str.split(" ", 50);
+    return str.split(" ", 100);
   }
   function inputToNums(filtered) {
     let nums = [];
@@ -86,7 +86,7 @@ function App() {
       </div>
 
       <div className="row">
-        <div className="column1">
+        <div className="column">
           <Graph
             id="myChart1"
             sortType="Selection Sort"
@@ -106,7 +106,7 @@ function App() {
             max={max}
           />
         </div>
-        <div className="column2">
+        <div className="column">
           <Graph
             id="myChart3"
             sortType="Merge Sort"

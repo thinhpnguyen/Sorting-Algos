@@ -62,7 +62,6 @@ function makeChart(props, chart_ctx, setGraph) {
     })
   );
 }
-let e = 0;
 
 let Graph = React.memo((props) => {
   // props.reset in initialized to true to render the empty graph first

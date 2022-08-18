@@ -92,19 +92,12 @@ html {
   align-items: center;
 }
 
-.column1 {
+.column {
   display: flex;
   flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-  align-items: flex-end;
-}
-.column2 {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-  align-items: flex-start;
+  flex-shrink: 0;
+  align-items: center;
+  flex-basis: 500px;
 }
 .graph {
   margin: 2rem 2rem;
