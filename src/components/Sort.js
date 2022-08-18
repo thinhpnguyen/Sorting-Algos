@@ -1,9 +1,9 @@
 let delay = 25;
 export function Sort(myChart, sortEn, type) {
   //let temp = myChart.data.datasets[0].data.slice(); // keep a copy for reset;
-  let inputArr = myChart.chart.data.datasets[0].data;
-  let labels = myChart.chart.data.labels;
-  let colors = myChart.chart.data.datasets[0].backgroundColor;
+  let inputArr = myChart.data.datasets[0].data;
+  let labels = myChart.data.labels;
+  let colors = myChart.data.datasets[0].backgroundColor;
   //let borderColors = myChart.chart.data.datasets[0].borderColor;
 
   let n = inputArr.length;
@@ -15,17 +15,17 @@ export function Sort(myChart, sortEn, type) {
 
   function highlight(i) {
     colors[i] = "rgba(255, 99, 132, 0.8)";
-    myChart.chart.update();
+    myChart.update();
   }
 
   function unhighlight(i) {
     colors[i] = "rgba(255, 99, 132, 0.2)";
-    myChart.chart.update();
+    myChart.update();
   }
 
   function highlightMin(i) {
     colors[i] = "rgba(54, 162, 235, 0.2)";
-    myChart.chart.update();
+    myChart.update();
   }
 
   const selectionSort = async () => {
@@ -70,7 +70,7 @@ export function Sort(myChart, sortEn, type) {
         inputArr[min] = tmp;
         labels[min] = labelTmp;
 
-        myChart.chart.update();
+        myChart.update();
       }
 
       //change color back
@@ -89,7 +89,7 @@ export function Sort(myChart, sortEn, type) {
     arr[min] = tmp;
     labels[min] = labelTmp;
 
-    myChart.chart.update();
+    myChart.update();
   }
   const bubbleSort = async () => {
     if (!sortEn) {
@@ -147,7 +147,7 @@ export function Sort(myChart, sortEn, type) {
         j++;
       }
       k++;
-      myChart.chart.update();
+      myChart.update();
       await sleep(delay);
     }
 
@@ -157,7 +157,7 @@ export function Sort(myChart, sortEn, type) {
       arr[k] = L[i];
       i++;
       k++;
-      myChart.chart.update();
+      myChart.update();
       await sleep(delay);
     }
 
@@ -167,7 +167,7 @@ export function Sort(myChart, sortEn, type) {
       arr[k] = R[j];
       j++;
       k++;
-      myChart.chart.update();
+      myChart.update();
       await sleep(delay);
     }
   };
