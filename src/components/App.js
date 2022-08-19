@@ -45,7 +45,7 @@ function App() {
   }
 
   function handleReset() {
-    console.log(nums);
+    //console.log(nums);
     updateReset(true);
     updateSortEn(false);
   }

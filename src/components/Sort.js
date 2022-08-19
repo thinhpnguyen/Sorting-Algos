@@ -1,120 +1,111 @@
+import { highlight, unhighlight, highlightMin } from "./Graph";
+
 let delay = 2;
-export function Sort(myChart, sortEn, type) {
+export function Sort(type) {
   //let temp = myChart.data.datasets[0].data.slice(); // keep a copy for reset;
   let inputArr = myChart.data.datasets[0].data;
   let labels = myChart.data.labels;
-  let colors = myChart.data.datasets[0].backgroundColor;
+
   //let borderColors = myChart.chart.data.datasets[0].borderColor;
 
   let n = inputArr.length;
 
   //used to slow down a loop
-  const sleep = (milliseconds) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-  };
+}
 
-  function highlight(i) {
-    colors[i] = "rgba(255, 99, 132, 0.8)";
-    myChart.update();
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
+
+function swap(myChart, i, min) {
+  let arr = myChart.data.datasets[0].data;
+  let labels = myChart.data.labels;
+
+  let tmp = arr[i];
+  let labelTmp = labels[i];
+
+  arr[i] = arr[min];
+  labels[i] = labels[min];
+
+  arr[min] = tmp;
+  labels[min] = labelTmp;
+
+  myChart.update();
+}
+
+export async function BubbleSort(myChart, sortEn) {
+  let inputArr = myChart.data.datasets[0].data;
+  let labels = myChart.data.labels;
+  let n = inputArr.length;
+  if (!sortEn) {
+    // stop the for loop if reset mid-way
+    return;
   }
 
-  function unhighlight(i) {
-    colors[i] = "rgba(255, 99, 132, 0.2)";
-    myChart.update();
-  }
-
-  function highlightMin(i) {
-    colors[i] = "rgba(54, 162, 235, 0.2)";
-    myChart.update();
-  }
-
-  const selectionSort = async () => {
-    for (let i = 0; i < n; i++) {
-      if (!sortEn) {
-        // stop the for loop if reset mid-way
-        return;
+  let i, j;
+  for (i = 0; i < n - 1; i++) {
+    //change color if ith column
+    //highlight(i);
+    for (j = 0; j < n - i - 1; j++) {
+      highlight(myChart, j);
+      if (inputArr[j] > inputArr[j + 1]) {
+        highlight(myChart, j + 1);
+        swap(myChart, j, j + 1);
       }
-      //change color if ith column
-      highlight(i);
-
-      // Finding the smallest number in the subarray
-      let min = i;
-      let exMin = i;
-      for (let j = i + 1; j < n; j++) {
-        //first hightlight the pointer
-        highlight(j);
-        if (inputArr[j] < inputArr[min]) {
-          exMin = min;
-          min = j;
-        }
-        await sleep(delay);
-        unhighlight(j);
-
-        //change the hightlight if min changes
-        if (min !== exMin) {
-          if (exMin !== i) {
-            unhighlight(exMin);
-          }
-          highlightMin(min);
-        }
-      }
-      if (min !== i) {
-        unhighlight(min);
-        // Swapping the elements and labels
-        let tmp = inputArr[i];
-        let labelTmp = labels[i];
-
-        inputArr[i] = inputArr[min];
-        labels[i] = labels[min];
-
-        inputArr[min] = tmp;
-        labels[min] = labelTmp;
-
-        myChart.update();
-      }
-
-      //change color back
-      unhighlight(i);
+      await sleep(myChart, delay);
+      unhighlight(myChart, j + 1);
+      unhighlight(myChart, j);
     }
-    // console.log(myChart.data.datasets[0].data)
-    //console.log(inputArr)
-  };
-  function swap(arr, i, min) {
-    let tmp = arr[i];
-    let labelTmp = labels[i];
-
-    arr[i] = arr[min];
-    labels[i] = labels[min];
-
-    arr[min] = tmp;
-    labels[min] = labelTmp;
-
-    myChart.update();
+    //unhighlight(i);
   }
-  const bubbleSort = async () => {
+}
+
+export async function SelectionSort(myChart, sortEn) {
+  let inputArr = myChart.data.datasets[0].data;
+  let n = inputArr.length;
+  for (let i = 0; i < n; i++) {
     if (!sortEn) {
       // stop the for loop if reset mid-way
       return;
     }
+    //change color if ith column
+    highlight(i);
 
-    let i, j;
-    for (i = 0; i < n - 1; i++) {
-      //change color if ith column
-      //highlight(i);
-      for (j = 0; j < n - i - 1; j++) {
-        highlight(j);
-        if (inputArr[j] > inputArr[j + 1]) {
-          highlight(j + 1);
-          swap(inputArr, j, j + 1);
-        }
-        await sleep(delay);
-        unhighlight(j + 1);
-        unhighlight(j);
+    // Finding the smallest number in the subarray
+    let min = i;
+    let exMin = i;
+    for (let j = i + 1; j < n; j++) {
+      //first hightlight the pointer
+      highlight(j);
+      if (inputArr[j] < inputArr[min]) {
+        exMin = min;
+        min = j;
       }
-      //unhighlight(i);
-    }
-  };
+      await sleep(delay);
+      unhighlight(j);
 
+      //change the hightlight if min changes
+      if (min !== exMin) {
+        if (exMin !== i) {
+          unhighlight(exMin);
+        }
+        highlightMin(min);
+      }
+    }
+    if (min !== i) {
+      unhighlight(min);
+      // Swapping the elements and labels
+      swap(myChart, min, i);
+    }
+
+    //change color back
+    unhighlight(i);
+  }
+  // console.log(myChart.data.datasets[0].data)
+  //console.log(inputArr)
+}
+
+function MergeSort() {
   const merge = async (arr, l, m, r) => {
     let n1 = m - l + 1;
     let n2 = r - m;
@@ -184,7 +175,9 @@ export function Sort(myChart, sortEn, type) {
   const mergeSort = () => {
     mergeSortHelper(inputArr, 0, n - 1);
   };
+}
 
+function QuickSort() {
   async function partition(arr, low, high) {
     // pivot
     let pivot = arr[high];
@@ -227,20 +220,4 @@ export function Sort(myChart, sortEn, type) {
   const quickSort = () => {
     quickSortHelper(inputArr, 0, n - 1);
   };
-  switch (type) {
-    case "Selection Sort":
-      selectionSort();
-      break;
-    case "Bubble Sort":
-      bubbleSort();
-      break;
-    case "Merge Sort":
-      mergeSort();
-      break;
-    case "Quick Sort":
-      quickSort();
-      break;
-    default:
-      console.log("Sort Error");
-  }
 }
