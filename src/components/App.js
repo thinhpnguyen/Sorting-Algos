@@ -2,37 +2,38 @@ import React, { useState, useMemo } from "react";
 import Graph from "./Graph.js";
 import Header from "./Header.js";
 import Input from "./Input.js";
+
+//this function takes in a string
+//filter out only the number part
+function filter(str) {
+  // only takes str the first 20 numbers, exlude other characters
+  str = str.replace(/[^\d\s]/g, "");
+  str = str.replace(/\s\s+/g, " ");
+  str = str.replace(/(^\s|\s$)/g, "");
+  //console.log(str);
+  return str.split(" ", 100);
+}
+function inputToNums(filtered) {
+  let nums = [];
+  filtered.forEach((str) => {
+    nums.push(parseInt(str));
+  });
+  return nums;
+}
+
+function findMax(nums) {
+  let m = 1; // default value for y-axis
+  nums.forEach((num) => {
+    if (num > m) m = num;
+  });
+  return m;
+}
+
 function App() {
   const [sortEn, updateSortEn] = useState(false);
   const [reset, updateReset] = useState(true); // render empty graph first
   //input
   const [input, updateInput] = useState("");
-
-  //this function takes in a string
-  //filter out only the number part
-  function filter(str) {
-    // only takes str the first 20 numbers, exlude other characters
-    str = str.replace(/[^\d\s]/g, "");
-    str = str.replace(/\s\s+/g, " ");
-    str = str.replace(/(^\s|\s$)/g, "");
-    //console.log(str);
-    return str.split(" ", 100);
-  }
-  function inputToNums(filtered) {
-    let nums = [];
-    filtered.forEach((str) => {
-      nums.push(parseInt(str));
-    });
-    return nums;
-  }
-
-  function findMax(nums) {
-    let m = 1; // default value for y-axis
-    nums.forEach((num) => {
-      if (num > m) m = num;
-    });
-    return m;
-  }
 
   const filteredInput = useMemo(() => filter(input), [input]); // use for labels
   const nums = useMemo(() => inputToNums(filteredInput), [filteredInput]);
@@ -93,7 +94,6 @@ function App() {
             sort={sortEn}
             reset={reset}
             nums={nums}
-            label={filteredInput}
             max={max}
           />
           <Graph
@@ -102,7 +102,6 @@ function App() {
             sort={sortEn}
             reset={reset}
             nums={nums}
-            label={filteredInput}
             max={max}
           />
         </div>
@@ -113,7 +112,6 @@ function App() {
             sort={sortEn}
             reset={reset}
             nums={nums}
-            label={filteredInput}
             max={max}
           />
           <Graph
@@ -122,7 +120,6 @@ function App() {
             sort={sortEn}
             reset={reset}
             nums={nums}
-            label={filteredInput}
             max={max}
           />
         </div>

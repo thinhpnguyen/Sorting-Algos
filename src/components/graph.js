@@ -64,7 +64,15 @@ class ChartWrapper {
   getChartCtx() {
     return this.chart_ctx;
   }
-
+  getChartCtxData() {
+    return this.chart_ctx.data.datasets[0].data;
+  }
+  updateAnElement(i, val) {
+    this.chart_ctx.data.datasets[0].data[i] = val;
+  }
+  updateData() {
+    this.chart_ctx.update();
+  }
   highlight(i) {
     let colors = this.chart_ctx.data.datasets[0].backgroundColor;
     colors[i] = "rgba(255, 99, 132, 0.8)";
