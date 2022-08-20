@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/thinhpnguyen/insta-homepage-clone/static/js/main.17bef761.chunk.js",
+    "main.js.map": "/thinhpnguyen/insta-homepage-clone/static/js/main.17bef761.chunk.js.map",
+    "runtime-main.js": "/thinhpnguyen/insta-homepage-clone/static/js/runtime-main.6057c47c.js",
+    "runtime-main.js.map": "/thinhpnguyen/insta-homepage-clone/static/js/runtime-main.6057c47c.js.map",
+    "static/js/2.cc435b15.chunk.js": "/thinhpnguyen/insta-homepage-clone/static/js/2.cc435b15.chunk.js",
+    "static/js/2.cc435b15.chunk.js.map": "/thinhpnguyen/insta-homepage-clone/static/js/2.cc435b15.chunk.js.map",
+    "index.html": "/thinhpnguyen/insta-homepage-clone/index.html",
+    "static/js/2.cc435b15.chunk.js.LICENSE.txt": "/thinhpnguyen/insta-homepage-clone/static/js/2.cc435b15.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6057c47c.js",
+    "static/js/2.cc435b15.chunk.js",
+    "static/js/main.17bef761.chunk.js"
+  ]
+}
