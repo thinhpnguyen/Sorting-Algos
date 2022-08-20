@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import Graph from "./Graph.js";
 import Header from "./Header.js";
 import Input from "./Input.js";
+import { BubbleSort, SelectionSort, MergeSort, QuickSort } from "./Sort.js";
 
 //this function takes in a string
 //filter out only the number part
@@ -41,8 +42,8 @@ function App() {
 
   //////////////// State Handles /////////////////////////
   function handleSort() {
-    updateSortEn(true);
     updateReset(false);
+    updateSortEn(true);
   }
 
   function handleReset() {
@@ -95,6 +96,7 @@ function App() {
             reset={reset}
             nums={nums}
             max={max}
+            sortFunction={SelectionSort}
           />
           <Graph
             id="myChart2"
@@ -103,6 +105,7 @@ function App() {
             reset={reset}
             nums={nums}
             max={max}
+            sortFunction={BubbleSort}
           />
         </div>
         <div className="column">
@@ -113,6 +116,7 @@ function App() {
             reset={reset}
             nums={nums}
             max={max}
+            sortFunction={MergeSort}
           />
           <Graph
             id="myChart4"
@@ -121,6 +125,7 @@ function App() {
             reset={reset}
             nums={nums}
             max={max}
+            sortFunction={QuickSort}
           />
         </div>
       </div>

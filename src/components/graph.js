@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
-//import { Sort } from "./Sort.js";
+//import { BubbleSort } from "./Sort.js";
 
+/*
+This class is an adapter which takes care of creating or updating the graph.js object
+It also adds more functionality such as highlighting
+*/
 class ChartWrapper {
   constructor(canvasId, data, title, height) {
-    this.backgroundColorArray = new Array(data.length);
-    this.backgroundColorArray.fill("rgba(255, 99, 132, 0.2)");
+    let backgroundColorArray = new Array(data.length);
+    backgroundColorArray.fill("rgba(255, 99, 132, 0.2)");
     let ctx = document.getElementById(canvasId).getContext("2d");
+
+    /* 
+    This flag this used to stop the async sort functions to operate on the new data when reset
+    Because the update methods will operate on new data array ref
+    We can move the update the methods to the Sort module instead, as a second choice, so they will only update on the old data set
+    Which the user will not see, 
+     */
+    this.flag = false;
 
     this.chart_ctx = new Chart(ctx, {
       type: "bar",
@@ -52,125 +64,74 @@ class ChartWrapper {
     });
   }
 
+  updateData() {
+    this.chart_ctx.update();
+  }
   updateChart(newData, max) {
+    this.flag = false;
     this.chart_ctx.data.datasets[0].data = newData;
     this.chart_ctx.data.labels = newData.map((v) => "");
-    this.chart_ctx.data.datasets[0].backgroundColor = [
-      ...this.backgroundColorArray,
-    ];
+    let backgroundColorArray = new Array(newData.length);
+    backgroundColorArray.fill("rgba(255, 99, 132, 0.2)");
+    this.chart_ctx.data.datasets[0].backgroundColor = [...backgroundColorArray];
     this.chart_ctx.options.scales.y.max = max;
-    this.chart_ctx.update();
+    this.updateData();
   }
   getChartCtx() {
     return this.chart_ctx;
   }
-  getChartCtxData() {
+  getChartData() {
     return this.chart_ctx.data.datasets[0].data;
   }
+  getChartLabels() {
+    return this.chart_ctx.labels;
+  }
+  getFlag() {
+    return this.flag;
+  }
+  /** Update Methods **/
+  setFlag(val) {
+    this.flag = val;
+  }
   updateAnElement(i, val) {
+    if (!this.flag) return;
     this.chart_ctx.data.datasets[0].data[i] = val;
   }
-  updateData() {
-    this.chart_ctx.update();
-  }
+
   highlight(i) {
-    let colors = this.chart_ctx.data.datasets[0].backgroundColor;
-    colors[i] = "rgba(255, 99, 132, 0.8)";
-    this.chart_ctx.update();
+    if (!this.flag) return;
+    this.chart_ctx.data.datasets[0].backgroundColor[i] =
+      "rgba(255, 99, 132, 0.8)";
+    this.updateData();
   }
 
-  unhighlight(myChart, i) {
-    let colors = this.chart_ctx.data.datasets[0].backgroundColor;
-    colors[i] = "rgba(255, 99, 132, 0.2)";
-    this.chart_ctx.update();
+  unhighlight(i) {
+    if (!this.flag) return;
+    this.chart_ctx.data.datasets[0].backgroundColor[i] =
+      "rgba(255, 99, 132, 0.2)";
+    this.updateData();
   }
 
-  highlightMin(myChart, i) {
-    let colors = this.chart_ctx.data.datasets[0].backgroundColor;
-    colors[i] = "rgba(54, 162, 235, 0.2)";
-    this.chart_ctx.update();
+  highlightMin(i) {
+    if (!this.flag) return;
+    this.chart_ctx.data.datasets[0].backgroundColor[i] =
+      "rgba(54, 162, 235, 0.2)";
+    this.updateData();
+  }
+
+  swap(a, b) {
+    if (!this.flag) return;
+    let arr = this.chart_ctx.data.datasets[0].data;
+
+    let tmp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = tmp;
+
+    this.updateData();
   }
 }
-// function makeChart(props, chart_ctx, setGraph) {
-//   let nums = [...props.nums]; //copy by value
-//   var ctx = document.getElementById(props.id).getContext("2d");
-//   let backgroundColorArray = new Array(nums.length);
-//   backgroundColorArray.fill("rgba(255, 99, 132, 0.2)");
 
-//   //For the subsequent renders, only need to update
-//   if (typeof chart_ctx !== "undefined") {
-//     chart_ctx.data.datasets[0].data = nums;
-//     chart_ctx.data.labels = nums.map((v) => "");
-//     chart_ctx.data.datasets[0].backgroundColor = backgroundColorArray.slice();
-//     chart_ctx.options.scales.y.max = props.max;
-//     chart_ctx.update();
-//     return;
-//   }
-//   setGraph(
-//     new Chart(ctx, {
-//       type: "bar",
-//       data: {
-//         labels: nums.map((v) => ""),
-//         datasets: [
-//           {
-//             label: props.sortType,
-//             data: nums,
-//             backgroundColor: backgroundColorArray,
-//             borderColor: "rgba(255, 99, 132, 1)",
-//             borderWidth: 1,
-//           },
-//         ],
-//       },
-//       options: {
-//         scales: {
-//           y: {
-//             max: props.max,
-//             beginAtZero: true,
-//           },
-//         },
-//         responsive: false,
-//         animation: {
-//           duration: 0,
-//         },
-//         plugins: {
-//           legend: {
-//             display: false,
-//           },
-//           tooltip: {
-//             enabled: false,
-//           },
-//           title: {
-//             display: true,
-//             text: props.sortType,
-//             font: {
-//               size: 20,
-//             },
-//           },
-//         },
-//       },
-//     })
-//   );
-// }
-
-// export function highlight(myChart, i) {
-//   let colors = myChart.data.datasets[0].backgroundColor;
-//   colors[i] = "rgba(255, 99, 132, 0.8)";
-//   myChart.update();
-// }
-
-// export function unhighlight(myChart, i) {
-//   let colors = myChart.data.datasets[0].backgroundColor;
-//   colors[i] = "rgba(255, 99, 132, 0.2)";
-//   myChart.update();
-// }
-
-// export function highlightMin(myChart, i) {
-//   let colors = myChart.data.datasets[0].backgroundColor;
-//   colors[i] = "rgba(54, 162, 235, 0.2)";
-//   myChart.update();
-// }
-
-let Graph = React.memo((props) => {
+let Graph = (props) => {
   // props.reset in initialized to true to render the empty graph first
   let [graph_wrapper, setGraph] = useState(undefined);
 
@@ -185,12 +146,14 @@ let Graph = React.memo((props) => {
   }, [props.reset]);
 
   useEffect(() => {
+    //console.log(props.sort);
+    graph_wrapper && graph_wrapper.setFlag(props.sort);
     if (props.sort) {
-      //Sort(graph_ctx, props.sort, props.sortType);
+      props.sortFunction(graph_wrapper);
     }
   }, [props.sort]);
   return (
     <canvas className="graph" id={props.id} width="400" height="400"></canvas>
   );
-});
+};
 export default Graph;
