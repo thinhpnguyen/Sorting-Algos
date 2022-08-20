@@ -1,3 +1,6 @@
+# Demo
+https://thinhpnguyen.github.io/Sorting-Algos
+
 # Getting started
 
 **Make sure that you already have npm installed.**
