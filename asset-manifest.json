@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.js": "/thinhpnguyen/Sorting-Algos/static/js/main.17bef761.chunk.js",
-    "main.js.map": "/thinhpnguyen/Sorting-Algos/static/js/main.17bef761.chunk.js.map",
-    "runtime-main.js": "/thinhpnguyen/Sorting-Algos/static/js/runtime-main.2b5c94f4.js",
-    "runtime-main.js.map": "/thinhpnguyen/Sorting-Algos/static/js/runtime-main.2b5c94f4.js.map",
-    "static/js/2.cc435b15.chunk.js": "/thinhpnguyen/Sorting-Algos/static/js/2.cc435b15.chunk.js",
-    "static/js/2.cc435b15.chunk.js.map": "/thinhpnguyen/Sorting-Algos/static/js/2.cc435b15.chunk.js.map",
-    "index.html": "/thinhpnguyen/Sorting-Algos/index.html",
-    "static/js/2.cc435b15.chunk.js.LICENSE.txt": "/thinhpnguyen/Sorting-Algos/static/js/2.cc435b15.chunk.js.LICENSE.txt"
+    "main.js": "/Sorting-Algos/static/js/main.17bef761.chunk.js",
+    "main.js.map": "/Sorting-Algos/static/js/main.17bef761.chunk.js.map",
+    "runtime-main.js": "/Sorting-Algos/static/js/runtime-main.e4ff14e7.js",
+    "runtime-main.js.map": "/Sorting-Algos/static/js/runtime-main.e4ff14e7.js.map",
+    "static/js/2.cc435b15.chunk.js": "/Sorting-Algos/static/js/2.cc435b15.chunk.js",
+    "static/js/2.cc435b15.chunk.js.map": "/Sorting-Algos/static/js/2.cc435b15.chunk.js.map",
+    "index.html": "/Sorting-Algos/index.html",
+    "static/js/2.cc435b15.chunk.js.LICENSE.txt": "/Sorting-Algos/static/js/2.cc435b15.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2b5c94f4.js",
+    "static/js/runtime-main.e4ff14e7.js",
     "static/js/2.cc435b15.chunk.js",
     "static/js/main.17bef761.chunk.js"
   ]
