@@ -193,3 +193,61 @@ export function QuickSort(ChartWrapper) {
     quickSortHelper(inputArr, 0, n - 1);
   })();
 }
+
+export async function InsertionSort(ChartWrapper) {
+  let arr = ChartWrapper.getChartData();
+  let n = arr.length;
+  let i, key, j;
+  for (i = 1; i < n; i++) {
+    if (!ChartWrapper.getFlag()) return;
+    key = arr[i];
+    j = i - 1;
+
+    /* Move elements of arr[0..i-1], that are  
+        greater than key, to one position ahead  
+        of their current position */
+    while (j >= 0 && arr[j] > key) {
+      if (!ChartWrapper.getFlag()) return;
+      arr[j + 1] = arr[j];
+      j = j - 1;
+      await sleep(50);
+      ChartWrapper.updateData();
+    }
+    arr[j + 1] = key;
+    await sleep(50);
+  }
+}
+
+export async function ShellSort(ChartWrapper) {
+  let arr = ChartWrapper.getChartData();
+  let n = arr.length;
+
+  // Start with a big gap, then reduce the gap
+  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+    // Do a gapped insertion sort for this gap size.
+    // The first gap elements a[0..gap-1] are already
+    // in gapped order keep adding one more element
+    // until the entire array is gap sorted
+    for (let i = gap; i < n; i += 1) {
+      // add a[i] to the elements that have been gap
+      // sorted save a[i] in temp and make a hole at
+      // position i
+      let temp = arr[i];
+
+      // shift earlier gap-sorted elements up until
+      // the correct location for a[i] is found
+      let j;
+      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+        arr[j] = arr[j - gap];
+        await sleep(delay);
+        ChartWrapper.updateData();
+      }
+
+      // put temp (the original a[i]) in its correct
+      // location
+      arr[j] = temp;
+      ChartWrapper.updateData();
+      await sleep(delay);
+    }
+  }
+}

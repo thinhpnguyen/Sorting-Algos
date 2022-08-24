@@ -2,7 +2,14 @@ import React, { useState, useMemo } from "react";
 import Graph from "./Graph.js";
 import Header from "./Header.js";
 import Input from "./Input.js";
-import { BubbleSort, SelectionSort, MergeSort, QuickSort } from "./Sort.js";
+import {
+  BubbleSort,
+  SelectionSort,
+  MergeSort,
+  QuickSort,
+  InsertionSort,
+  ShellSort,
+} from "./Sort.js";
 
 //this function takes in a string
 //filter out only the number part
@@ -34,7 +41,9 @@ function App() {
   const [sortEn, updateSortEn] = useState(false);
   const [reset, updateReset] = useState(true); // render empty graph first
   //input
-  const [input, updateInput] = useState("");
+  const [input, updateInput] = useState(
+    "9 8 7 6 5 4 3 2 3 4 5 6 7 6 5 4 3 2 3 4 5 6 7 8 9"
+  );
 
   const filteredInput = useMemo(() => filter(input), [input]); // use for labels
   const nums = useMemo(() => inputToNums(filteredInput), [filteredInput]);
@@ -107,10 +116,19 @@ function App() {
             max={max}
             sortFunction={BubbleSort}
           />
+          <Graph
+            id="myChart3"
+            sortType="Shell Sort"
+            sort={sortEn}
+            reset={reset}
+            nums={nums}
+            max={max}
+            sortFunction={ShellSort}
+          />
         </div>
         <div className="column">
           <Graph
-            id="myChart3"
+            id="myChart4"
             sortType="Merge Sort"
             sort={sortEn}
             reset={reset}
@@ -119,13 +137,22 @@ function App() {
             sortFunction={MergeSort}
           />
           <Graph
-            id="myChart4"
+            id="myChart5"
             sortType="Quick Sort"
             sort={sortEn}
             reset={reset}
             nums={nums}
             max={max}
             sortFunction={QuickSort}
+          />
+          <Graph
+            id="myChart6"
+            sortType="Insertion Sort"
+            sort={sortEn}
+            reset={reset}
+            nums={nums}
+            max={max}
+            sortFunction={InsertionSort}
           />
         </div>
       </div>

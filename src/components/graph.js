@@ -28,7 +28,7 @@ class ChartWrapper {
           {
             label: title,
             data: data,
-            backgroundColor: this.backgroundColorArray,
+            backgroundColor: [...backgroundColorArray],
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1,
           },
@@ -136,17 +136,18 @@ let Graph = (props) => {
   let [graph_wrapper, setGraph] = useState(undefined);
 
   useEffect(() => {
-    if (props.reset && graph_wrapper === undefined) {
+    if (!props.reset) return;
+    if (graph_wrapper === undefined) {
       setGraph(
         new ChartWrapper(props.id, [...props.nums], props.sortType, props.max)
       );
-    } else if (props.reset && graph_wrapper !== undefined) {
+    } else {
       graph_wrapper.updateChart([...props.nums], props.max);
     }
   }, [props.reset]);
 
   useEffect(() => {
-    //console.log(props.sort);
+    console.log(graph_wrapper);
     graph_wrapper && graph_wrapper.setFlag(props.sort);
     if (props.sort) {
       props.sortFunction(graph_wrapper);
