@@ -67,6 +67,8 @@ export async function SelectionSort(ChartWrapper) {
 
 export function MergeSort(ChartWrapper) {
   const merge = async (arr, l, m, r) => {
+    ChartWrapper.highlight(l);
+    ChartWrapper.highlight(r);
     if (!ChartWrapper.getFlag()) return;
     let n1 = m - l + 1;
     let n2 = r - m;
@@ -125,6 +127,9 @@ export function MergeSort(ChartWrapper) {
       ChartWrapper.updateData();
       await sleep(delay);
     }
+
+    ChartWrapper.unhighlight(l);
+    ChartWrapper.unhighlight(r);
   };
   const mergeSortHelper = async (arr, l, r) => {
     if (!ChartWrapper.getFlag()) return;
