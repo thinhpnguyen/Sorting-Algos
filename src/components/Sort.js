@@ -1,4 +1,4 @@
-let delay = 200;
+let delay = 10;
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -132,7 +132,7 @@ export function MergeSort(ChartWrapper) {
     if (l >= r) {
       return; //returns recursively
     }
-    let m = l + parseInt((r - l) / 2);
+    let m = l + Math.floor((r - l) / 2);
     await mergeSortHelper(arr, l, m);
     await mergeSortHelper(arr, m + 1, r);
     await merge(arr, l, m, r);
@@ -200,6 +200,7 @@ export async function InsertionSort(ChartWrapper) {
   let i, key, j;
   for (i = 1; i < n; i++) {
     if (!ChartWrapper.getFlag()) return;
+
     key = arr[i];
     j = i - 1;
 
@@ -208,10 +209,14 @@ export async function InsertionSort(ChartWrapper) {
         of their current position */
     while (j >= 0 && arr[j] > key) {
       if (!ChartWrapper.getFlag()) return;
+      ChartWrapper.highlight(j);
+      ChartWrapper.highlight(j + 1);
       arr[j + 1] = arr[j];
-      j = j - 1;
-      await sleep(delay);
       ChartWrapper.updateData();
+      await sleep(delay);
+      ChartWrapper.unhighlight(j);
+      ChartWrapper.unhighlight(j + 1);
+      j = j - 1;
     }
     arr[j + 1] = key;
     await sleep(delay);
@@ -249,12 +254,12 @@ export async function ShellSort(ChartWrapper) {
         arr[j] = arr[j - gap];
         ChartWrapper.updateData();
         await sleep(delay);
-        ChartWrapper.unhighlight(i);
-        ChartWrapper.unhighlight(i - gap);
+        ChartWrapper.unhighlight(j);
+        ChartWrapper.unhighlight(j - gap);
       }
       await sleep(delay);
-      ChartWrapper.unhighlight(j);
-      ChartWrapper.unhighlight(j - gap);
+      ChartWrapper.unhighlight(i);
+      ChartWrapper.unhighlight(i - gap);
       // put temp (the original a[i]) in its correct
       // location
       arr[j] = temp;
