@@ -1,4 +1,4 @@
-let delay = 50;
+let delay = 200;
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -210,11 +210,11 @@ export async function InsertionSort(ChartWrapper) {
       if (!ChartWrapper.getFlag()) return;
       arr[j + 1] = arr[j];
       j = j - 1;
-      await sleep(50);
+      await sleep(delay);
       ChartWrapper.updateData();
     }
     arr[j + 1] = key;
-    await sleep(50);
+    await sleep(delay);
   }
 }
 
@@ -224,11 +224,13 @@ export async function ShellSort(ChartWrapper) {
 
   // Start with a big gap, then reduce the gap
   for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+    if (!ChartWrapper.getFlag()) return;
     // Do a gapped insertion sort for this gap size.
     // The first gap elements a[0..gap-1] are already
     // in gapped order keep adding one more element
     // until the entire array is gap sorted
     for (let i = gap; i < n; i += 1) {
+      if (!ChartWrapper.getFlag()) return;
       // add a[i] to the elements that have been gap
       // sorted save a[i] in temp and make a hole at
       // position i
@@ -237,17 +239,26 @@ export async function ShellSort(ChartWrapper) {
       // shift earlier gap-sorted elements up until
       // the correct location for a[i] is found
       let j;
+      //highlight in case doesn't enter the for loop
+      ChartWrapper.highlight(i);
+      ChartWrapper.highlight(i - gap);
       for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+        if (!ChartWrapper.getFlag()) return;
+        ChartWrapper.highlight(j);
+        ChartWrapper.highlight(j - gap);
         arr[j] = arr[j - gap];
-        await sleep(delay);
         ChartWrapper.updateData();
+        await sleep(delay);
+        ChartWrapper.unhighlight(i);
+        ChartWrapper.unhighlight(i - gap);
       }
-
+      await sleep(delay);
+      ChartWrapper.unhighlight(j);
+      ChartWrapper.unhighlight(j - gap);
       // put temp (the original a[i]) in its correct
       // location
       arr[j] = temp;
       ChartWrapper.updateData();
-      await sleep(delay);
     }
   }
 }
