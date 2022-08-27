@@ -224,6 +224,7 @@ export async function InsertionSort(ChartWrapper) {
       j = j - 1;
     }
     arr[j + 1] = key;
+    ChartWrapper.updateData();
     await sleep(delay);
   }
 }
