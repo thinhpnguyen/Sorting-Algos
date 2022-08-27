@@ -24,7 +24,7 @@ function filter(str) {
 function inputToNums(filtered) {
   let nums = [];
   filtered.forEach((str) => {
-    nums.push(parseInt(str));
+    nums.push(parseInt(str, 10));
   });
   return nums;
 }
