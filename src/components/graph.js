@@ -131,30 +131,26 @@ class ChartWrapper {
   }
 }
 
-let Graph = (props) => {
+let Graph = ({ id, sortType, sort, reset, nums, max, sortFunction }) => {
   // props.reset in initialized to true to render the empty graph first
   let [graph_wrapper, setGraph] = useState(undefined);
 
   useEffect(() => {
-    if (!props.reset) return;
+    if (!reset) return;
     if (graph_wrapper === undefined) {
-      setGraph(
-        new ChartWrapper(props.id, [...props.nums], props.sortType, props.max)
-      );
+      setGraph(new ChartWrapper(id, [...nums], sortType, max));
     } else {
-      graph_wrapper.updateChart([...props.nums], props.max);
+      graph_wrapper.updateChart([...nums], max);
     }
-  }, [props.reset]);
+  }, [graph_wrapper, id, max, nums, sortType, reset]);
 
   useEffect(() => {
     console.log(graph_wrapper);
-    graph_wrapper && graph_wrapper.setFlag(props.sort);
-    if (props.sort) {
-      props.sortFunction(graph_wrapper);
+    graph_wrapper && graph_wrapper.setFlag(sort);
+    if (sort) {
+      sortFunction(graph_wrapper);
     }
-  }, [props.sort]);
-  return (
-    <canvas className="graph" id={props.id} width="400" height="400"></canvas>
-  );
+  }, [sortFunction, graph_wrapper, sort]);
+  return <canvas className="graph" id={id} width="400" height="400"></canvas>;
 };
 export default Graph;
