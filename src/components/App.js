@@ -81,19 +81,21 @@ function App() {
   return (
     <div>
       <Header />
-      <Input
-        handleChange={handleChange}
-        handleClear={handleClear}
-        handleEnter={handleEnter}
-        input={input}
-      />
-      <div className="globalButton">
-        <button className="button" onClick={handleSort}>
-          Sort
-        </button>
-        <button className="button" onClick={handleReset}>
-          Reset
-        </button>
+      <div className="controlArea">
+        <Input
+          handleChange={handleChange}
+          handleClear={handleClear}
+          handleEnter={handleEnter}
+          input={input}
+        />
+        <div className="globalButton">
+          <button className="button" onClick={handleSort}>
+            Sort
+          </button>
+          <button className="button" onClick={handleReset}>
+            Reset
+          </button>
+        </div>
       </div>
 
       <div className="row">
