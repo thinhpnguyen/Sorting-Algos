@@ -25,6 +25,7 @@ html {
   width: 100%;
   flex-direction: row;
   height: 2rem;
+  background-color: white;
 }
 .input {
   flex: 1;
