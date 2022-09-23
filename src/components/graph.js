@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
-//import { BubbleSort } from "./Sort.js";
 
 /*
 This class is an adapter which takes care of creating or updating the graph.js object
@@ -89,7 +88,9 @@ class ChartWrapper {
   getFlag() {
     return this.flag;
   }
+
   /** Update Methods **/
+
   setFlag(val) {
     this.flag = val;
   }

@@ -9,7 +9,7 @@ import {
   QuickSort,
   InsertionSort,
   ShellSort,
-} from "./Sort.js";
+} from "../utilities/Sort.js";
 
 //this function takes in a string
 //filter out only the number part
