@@ -9,6 +9,7 @@ function input(props) {
         className="input"
         value={props.input}
         onKeyDown={props.handleEnter}
+        autoFocus
       />
       <div>
         <i className="fas fa-times clearButton" onClick={props.handleClear}></i>

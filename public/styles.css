@@ -39,6 +39,7 @@ html {
   resize: none;
   overflow: auto;
   text-align: center;
+  border-radius: 0;
 }
 
 .inputField > div {
@@ -59,6 +60,11 @@ html {
   border-width: 1px;
   padding: 0 5px;
 }
+/* Safari weird rounded border */
+input[type="search"] {
+  -webkit-appearance: none;
+}
+
 .globalButton {
   display: flex;
   justify-content: center;
@@ -76,7 +82,7 @@ html {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-.graphDiv {
+/* .graphDiv {
   display: flex;
   position: relative;
   width: 100%;
@@ -84,7 +90,7 @@ html {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-}
+} */
 .row {
   display: flex;
   flex-direction: row;
@@ -97,12 +103,13 @@ html {
 .column {
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   align-items: center;
-  flex-basis: 500px;
 }
 .graph {
   margin: 2rem 2rem;
+  max-width: 100%;
+  max-height: 100vw;
+  aspect-ratio: 1/1;
 }
 
 .controlArea {
